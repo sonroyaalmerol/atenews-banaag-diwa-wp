@@ -1,0 +1,18 @@
+{
+    "name": "sonroyaalmerol/atenews-banaag-diwa-wp",
+    "description": "A plugin developed for submission uploads for Atenews Banaag Diwa.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Son Roy Almerol",
+            "email": "sonroya.almerol@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}

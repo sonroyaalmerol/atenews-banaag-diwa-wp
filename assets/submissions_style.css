@@ -1,0 +1,42 @@
+.download-button-submission {
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.download-button-submission span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.download-button-submission span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.download-button-submission:hover span {
+  padding-right: 25px;
+}
+
+.download-button-submission:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.download-all-submission {
+  background-color: #4CAF50;
+}
+.download-submission {
+  background-color: #008CBA;
+}
