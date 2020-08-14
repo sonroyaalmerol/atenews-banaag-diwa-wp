@@ -42,6 +42,28 @@ class Submissions {
       $type = null;
     }
 
+    $post_type = '';
+    switch($type) {
+      case 0:
+        $post_type = 'photo_essay_sub';
+        break;
+      case 1:
+        $post_type = 'short_story_sub';
+        break;
+      case 2:
+        $post_type = 'poem_sub';
+        break;
+    }
+
+    $submission_data = array(
+      'post_title' => $title,
+      'post_type' => $post_type,
+      'post_status' => 'publish'
+    );
+
+    $submission_id = wp_insert_post($submission_data);
+
+
     $permittedExtension = ['docx', 'doc', 'txt'];
     $permittedTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
 
@@ -146,7 +168,7 @@ class Submissions {
         'post_title' => preg_replace( '/\.[^.]+$/', '', $doc['name'] ),
         'post_content' => '',
         'post_status' => 'inherit'
-      ), $new_file_path);
+      ), $new_file_path, $submission_id);
 
       // Generate and save the attachment metas into the database
       wp_update_attachment_metadata( $doc_id, wp_generate_attachment_metadata( $doc_id, $new_file_path ) );
@@ -176,7 +198,7 @@ class Submissions {
               'post_title' => preg_replace( '/\.[^.]+$/', '', $images['name'][$key] ),
               'post_content' => '',
               'post_status' => 'inherit'
-            ), $images_file_path[$key]);
+            ), $images_file_path[$key], $submission_id);
       
             // Generate and save the attachment metas into the database
             wp_update_attachment_metadata( $image_ids[$key], wp_generate_attachment_metadata( $image_ids[$key], $images_file_path[$key] ) );
@@ -196,7 +218,7 @@ class Submissions {
         'post_title' => preg_replace( '/\.[^.]+$/', '', $title . '_' . $name . '_images.zip'),
         'post_content' => '',
         'post_status' => 'inherit'
-      ), $zipname_images);
+      ), $zipname_images, $submission_id);
 
       // Generate and save the attachment metas into the database
       wp_update_attachment_metadata($zip_id, wp_generate_attachment_metadata( $zip_id, $zipname_images ));
@@ -214,33 +236,12 @@ class Submissions {
         'post_title' => preg_replace( '/\.[^.]+$/', '', $title . '_' . $name . '.zip'),
         'post_content' => '',
         'post_status' => 'inherit'
-      ), $zipname_all);
+      ), $zipname_all, $submission_id);
 
       // Generate and save the attachment metas into the database
       wp_update_attachment_metadata($zip_id_all, wp_generate_attachment_metadata( $zip_id_all, $zipname_all ));
       //*/
     }
-
-    $post_type = '';
-    switch($type) {
-      case 0:
-        $post_type = 'photo_essay_sub';
-        break;
-      case 1:
-        $post_type = 'short_story_sub';
-        break;
-      case 2:
-        $post_type = 'poem_sub';
-        break;
-    }
-
-    $submission_data = array(
-      'post_title' => $title,
-      'post_type' => $post_type,
-      'post_status' => 'publish'
-    );
-
-    $submission_id = wp_insert_post($submission_data);
     
     update_post_meta($submission_id, '_submitter_name', $name);
     update_post_meta($submission_id, '_submitter_email', $email);
