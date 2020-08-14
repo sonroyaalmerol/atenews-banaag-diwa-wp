@@ -6,7 +6,8 @@ class Submissions {
   public function register() {
     add_action('rest_api_init', function() {
 			register_rest_route('atenews/v1', 'banaag_diwa_submit', [
-				'methods' => 'POST',
+        'methods' => 'POST',
+        'permission_callback' => __return_true(),
         'callback' => array($this, 'addSubmission')
       ]);
     });
