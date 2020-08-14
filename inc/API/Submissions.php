@@ -52,6 +52,10 @@ class Submissions {
     $doc = null;
     $images = [];
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      return rest_ensure_response(['success' => false, 'error' => 'Invalid email!']);
+    }
+
     if ( !empty( $files ) && !empty( $files['document'] ) ) {
       $doc = $files['document'];
       if (!empty($files['images'])) {
