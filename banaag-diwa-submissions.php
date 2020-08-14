@@ -6,7 +6,7 @@
 Plugin Name: Banaag Diwa Submissions
 Plugin URI: https://github.com/sonroyaalmerol/atenews-banaag-diwa-wp
 Description: A plugin developed for submission uploads for Atenews Banaag Diwa based on WP REST API.
-Version: 1.0.0
+Version: 1.0.1
 Author: Son Roy Almerol
 Author URI: https://github.com/sonroyaalmerol
 License: MIT
