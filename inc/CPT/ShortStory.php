@@ -135,6 +135,13 @@ class ShortStory {
         }
       }
     } );
+
+    add_action('trashed_post', function ($post_id) {
+      if (get_post_type($post_id) === 'short_story_sub') {
+        // Force delete
+        wp_delete_post( $post_id, true );
+      }
+    });
   }
 }
 
