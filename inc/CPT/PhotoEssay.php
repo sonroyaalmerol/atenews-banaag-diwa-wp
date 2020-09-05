@@ -89,7 +89,7 @@ class PhotoEssay {
         <?php
         foreach ($value as $image) {
           ?>
-          <img style="margin-right: 10px" src="<?php echo wp_get_attachment_image_src($image, $size = 'medium', true)[0]; ?>"></img>
+          <img style="margin-right: 10px; width: 50%; height: auto;" src="<?php echo wp_get_attachment_image_src($image, $size = 'medium', true)[0]; ?>"></img>
           <?php
         }
       }, 'photo_essay_sub', 'normal');

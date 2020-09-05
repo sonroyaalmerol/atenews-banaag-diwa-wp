@@ -73,8 +73,8 @@ class Submissions {
       'post_status' => 'publish'
     );
 
-    $permittedExtension = ['docx', 'doc', 'txt'];
-    $permittedTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+    $permittedExtension = ['docx', 'doc', 'pdf'];
+    $permittedTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
 
     $imageTypes = ['image/jpeg', 'image/pipeg', 'image/png'];
 
@@ -130,14 +130,14 @@ class Submissions {
     $ext = pathinfo( $doc['name'], PATHINFO_EXTENSION );
     if ( !in_array($ext, $permittedExtension) ) {
       $valid = false;
-      return rest_ensure_response(['success' => false, 'error' => 'Not a doc/docx file.']);
+      return rest_ensure_response(['success' => false, 'error' => 'Not a doc/docx/pdf file.']);
     }
     // check type
     $mimeType = mime_content_type($doc['tmp_name']);
     if ( !in_array( $doc['type'], $permittedTypes )
         || !in_array( $mimeType, $permittedTypes ) ) {
           $valid = false;
-          return rest_ensure_response(['success' => false, 'error' => 'Not a doc/docx file.', 'mime' => $mimeType]);
+          return rest_ensure_response(['success' => false, 'error' => 'Not a doc/docx/pdf file.', 'mime' => $mimeType]);
     }
 
     if ($type == 0 && count($images) == 0) {
@@ -170,7 +170,7 @@ class Submissions {
 
     if ($valid) {
       $submission_id = wp_insert_post($submission_data);
-      
+
       require_once( \ABSPATH . 'wp-admin/includes/image.php' );
 
       $image_ids = [];
